@@ -41,7 +41,7 @@ class ArrayDeque:
         return f"[{', '.join(map(str, self._data))}]"
 
 
-# execuao das operacoes
+# execucao das operacoes
 print("OPERACOES NO DEQUE\n")
 
 deque = ArrayDeque()
