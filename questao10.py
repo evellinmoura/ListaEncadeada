@@ -1,3 +1,4 @@
+"""calculadora aritmetica"""
 class ArrayStack:
     def __init__(self):
         self._data = []
@@ -109,4 +110,4 @@ while True:
         print(f"Pos-fixa: {' '.join(posfixa)}")
         print(f"Resultado: {resultado}")
     except Exception as e:
-        print(" Erro: Expressao inválida")
+        print(" Erro: Expressao invalida")
