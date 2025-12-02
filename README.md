@@ -61,4 +61,3 @@ O repositório contém diversos arquivos de questões:
 
 - Certifique-se de ter o Python instalado corretamente antes de executar os arquivos
 - Todas as questões estão na branch `main` do repositório
-- Em caso de dúvidas, consulte os commits para entender o histórico de desenvolvimento
