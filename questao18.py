@@ -32,28 +32,27 @@ class LinkedList:
         return f"[{' -> '.join(items)}]"
 
 
-def reverter_recursivo(node):
-    if node is None or node.next is None:
-        return node
+def separar_positivos_negativos(lista):
+    positivos = LinkedList()
+    negativos = LinkedList()
     
-    nova_head = reverter_recursivo(node.next)
+    current = lista._head
+    while current is not None:
+        if current.data > 0:
+            positivos.add(current.data)
+        elif current.data < 0:
+            negativos.add(current.data)
+        current = current.next
     
-    node.next.next = node
-    node.next = None
-    
-    return nova_head
-
-
-def reverter(lista):
-    lista._head = reverter_recursivo(lista._head)
+    return positivos, negativos
 
 
 print("=" * 60)
-print("REVERSAO RECURSIVA DE LISTA ENCADEADA")
+print("SEPARAR NUMEROS POSITIVOS E NEGATIVOS")
 print("=" * 60)
 
 while True:
-    print("\nDigite valores (separados por espaço) ou 'sair':")
+    print("\nDigite numeros (separados por espaço) ou 'sair':")
     entrada = input("→ ")
     
     if entrada.lower() == 'sair':
@@ -67,9 +66,16 @@ while True:
             try:
                 lista.add(int(valor))
             except:
-                lista.add(valor)
+                print(f"'{valor}' não é um numero valido, ignorando...")
+    
+    if lista.is_empty():
+        print("Lista esta vazia")
+        continue
     
     print(f"\nLista original: {lista}")
-    reverter(lista)
-    print(f"Lista revertida: {lista}")
+    
+    positivos, negativos = separar_positivos_negativos(lista)
+    
+    print(f"Lista positivos: {positivos}")
+    print(f"Lista negativos: {negativos}")
     print("-" * 60)

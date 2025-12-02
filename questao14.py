@@ -13,9 +13,6 @@ class LinkedList:
         return self._head is None
     
     def add(self, item):
-        if self._size >= 5:
-            raise ValueError("A lista apenas pode conter no maximo 5 valores.")
-        
         new_node = Node(item)
         if self.is_empty():
             self._head = new_node
@@ -24,7 +21,6 @@ class LinkedList:
             while current.next:
                 current = current.next
             current.next = new_node
-        
         self._size += 1
     
     def __str__(self):
@@ -36,39 +32,74 @@ class LinkedList:
             items.append(str(current.data))
             current = current.next
         return f"[{' -> '.join(items)}]"
+    
+    def __len__(self):
+        return self._size
 
 
-def encontra_penultimo(lista):
-    if lista._head is None:
-        raise ValueError("Lista vazia")
+def concatenar(L, M):
+    if L.is_empty():
+        L._head = M._head
+        L._size = M._size
+    else:
+        current = L._head
+        while current.next is not None:
+            current = current.next
+        current.next = M._head
+        L._size += M._size
     
-    if lista._head.next is None:
-        raise ValueError("Lista tem apenas um elemento")
-    
-    current = lista._head
-    while current.next.next is not None:
-        current = current.next
-    
-    return current.data
+    M._head = None
+    M._size = 0
 
 
-if __name__ == "__main__":
-    print("ALGORITMO PARA ENCONTRAR PENULTIMO NO\n")
+print("=" * 60)
+print("CONCATENACAO DE LISTAS ENCADEADAS")
+print("=" * 60)
+
+while True:
+    print("\n--- LISTA L ---")
+    L = LinkedList()
+    entrada = input("Digite valores para L (separados por espaco): ")
     
-    lista = LinkedList()
+    if entrada.lower() == 'sair':
+        print("Encerrando...")
+        break
     
+    if entrada.strip():
+        for valor in entrada.split():
+            try:
+                L.add(int(valor))
+            except:
+                L.add(valor)
     
-    try:
-        lista.add(10)
-        lista.add(20)
-        lista.add(30)
-        lista.add(40)
-        lista.add(50)
-        lista.add(60)  
-    except ValueError as e:
-        print(f"Erro ao inserir: {e}")
+    print("\n--- LISTA M ---")
+    M = LinkedList()
+    entrada = input("Digite valores para M (separados por espaco): ")
     
-    print(f"Lista: {lista}")
+    if entrada.lower() == 'sair':
+        print("Encerrando...")
+        break
     
-    penultimo = encontra_penultimo(lista)
-    print(f"Penultimo no: {penultimo}")
+    if entrada.strip():
+        for valor in entrada.split():
+            try:
+                M.add(int(valor))
+            except:
+                M.add(valor)
+    
+    print("\n" + "=" * 60)
+    print("ANTES DA CONCATENACAO:")
+    print(f"L: {L} (tamanho: {len(L)})")
+    print(f"M: {M} (tamanho: {len(M)})")
+    
+    concatenar(L, M)
+    
+    print("\nDEPOIS DA CONCATENACAO:")
+    print(f"L: {L} (tamanho: {len(L)})")
+    print(f"M: {M} (tamanho: {len(M)})")
+    print("=" * 60)
+    
+    continuar = input("\nDeseja fazer outra concatenacao? (s/n): ")
+    if continuar.lower() != 's':
+        print("Encerrando...")
+        break
